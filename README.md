@@ -8,6 +8,11 @@ These playbooks assume a freshly minted Raspberry Pi running the current version
 
 These playbooks also assume that you have [Ansible installed](https://docs.ansible.com/ansible/latest/intro_installation.html) and ready on your control machine.
 
+You also need to have `sshpass` installed on host machine
+```bash
+$ sudo apt-get install sshpass
+```
+
 ## Inventory
 
 When a Pi first boots it (usually) receives a DHCP assigned IP address, which the Lockdown playbook changes to a static IP.
