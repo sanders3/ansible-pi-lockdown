@@ -8,7 +8,6 @@
      - set-hostname
      - create-user
      - disable-passwords
-     - static-ip
      - expand-filesystem
 
   vars_prompt:
@@ -28,18 +27,4 @@
       private: no
     - name: "public_key"
       prompt: "Path to public SSH key"
-      private: no
-    - name: "interface"
-      prompt: "Ethernet interface"
-      default: "eth0"
-      private: no
-    - name: "ipaddress"
-      prompt: "Static IPv4 address"
-      private: no
-    - name: "routers"
-      prompt: "Routers (comma separated)"
-      private: no
-    - name: "dns_servers"
-      prompt: "DNS servers (space separated)"
-      default: "8.8.8.8 8.8.4.4"
       private: no
