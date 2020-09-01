@@ -59,7 +59,7 @@ Performs some initial setup and lockdown on your new Pi.
 * Sets the hostname for the Pi
 * Creates a new user and deploys an SSH public key for the user
 * Disables password authentication and enforces SSH key authentication
-* Sets a static IP address, router and DNS servers
+* Doesn't set a static IP address, because my hub will do that
 * Expands the root filesystem to fill any remaining space on the Pi's SD card
 
 ### Usage
@@ -80,10 +80,6 @@ Password:
 confirm Password:
 Username description: Guest Account
 Path to public SSH key: /tmp/id_rsa.pub
-Ethernet interface [eth0]:
-Static IPv4 address: 192.168.1.2
-Routers (comma separated): 192.168.1.1
-DNS servers (comma separated) [8.8.8.8,8.8.4.4]:
 
 PLAY [Application server specific playbook] ************************************
 
@@ -105,18 +101,9 @@ changed: [192.168.1.237]
 TASK [disable-passwords : Disable SSH password authentication] *****************
 changed: [192.168.1.237]
 
-TASK [static-ip : Configure static IP in  /etc/dhcpcd.conf] ********************
-changed: [192.168.1.237] => (item={u'regexp': u'^interface eth[0-9]$', u'line': u'interface eth0'})
-changed: [192.168.1.237] => (item={u'regexp': u'^static ip_address', u'line': u'static ip_address=192.168.1.2'})
-changed: [192.168.1.237] => (item={u'regexp': u'^static routers', u'line': u'static routers=192.168.1.1'})
-changed: [192.168.1.237] => (item={u'regexp': u'^static domain_name_servers', u'line': u'static domain_name_servers=8.8.8.8,8.8.4.4'})
-
-TASK [expand-filesystem : Expand filesystem to fill disk] **********************
-changed: [192.168.1.237]
-
-RUNNING HANDLER [static-ip : reboot] *******************************************
+RUNNING HANDLER [disable-passwords : reboot] *******************************************
 changed: [192.168.1.237]
 
 PLAY RECAP *********************************************************************
-192.168.1.237              : ok=9    changed=8    unreachable=0    failed=0  
+192.168.1.237              : ok=7    changed=6    unreachable=1    failed=0  
 ```
